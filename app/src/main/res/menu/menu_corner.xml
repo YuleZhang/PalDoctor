@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_1"
+        android:orderInCategory="80"
+        android:title="@string/first"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_2"
+        android:orderInCategory="80"
+        android:title="@string/sectond"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_3"
+        android:orderInCategory="80"
+        android:title="@string/third"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_4"
+        android:orderInCategory="80"
+        android:title="@string/four"
+        app:showAsAction="never" />
+</menu>
