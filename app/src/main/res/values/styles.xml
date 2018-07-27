@@ -6,9 +6,11 @@
         <item name="colorPrimary">@color/lightblue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
     </style>
     <style name="NoTitle" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <item name="android:fontFamily">sans-serif-thin</item>
         <!--<item name="android:windowFullscreen">true</item>-->
     </style>
 

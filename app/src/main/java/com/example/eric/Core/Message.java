@@ -1,35 +1,30 @@
-package com.example.eric.Personal;
+package com.example.eric.Core;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.eric.Core.InfSetting;
-import com.example.eric.Core.MainActivity;
 import com.example.eric.R;
 
 /**
- * Created by Eric_ on 2018/7/19.
+ * Created by Eric_ on 2018/7/27.
  */
 
-public class MedicalRecord extends Activity{
+public class Message extends AppCompatActivity {
     ImageButton ImaBtnBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personal_medical);
-        ImaBtnBack = findViewById(R.id.medical_imaBtm_back);
+        setContentView(R.layout.core_message);
+        ImaBtnBack = findViewById(R.id.message_imaBtm_back);
         ImaBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backIntent = new Intent();
-                //把返回数据存入Intent
-                backIntent.putExtra("result", "");
-                //设置返回数据
-                MedicalRecord.this.setResult(RESULT_OK, backIntent);
+                setResult(RESULT_OK,backIntent);
                 finish();
             }
         });

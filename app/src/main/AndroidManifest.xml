@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.eric">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -22,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Land.Login"
+            android:theme="@style/NoTitle"
             android:label="@string/btLoad"
             android:screenOrientation="portrait">
 
@@ -31,6 +34,7 @@
 
         </activity>
         <activity android:name=".Land.Regist"
+            android:theme="@style/NoTitle"
             android:label="@string/btRegiste">
 
         </activity>
@@ -44,6 +48,24 @@
 
         </activity>
         <activity android:name=".Personal.MeasureRecord">
+
+        </activity>
+        <activity android:name=".Core.InfSetting">
+
+        </activity>
+        <activity android:name=".Personal.SelfInfo">
+
+        </activity>
+        <activity android:name=".Personal.DocEnsure">
+
+        </activity>
+        <activity android:name=".Personal.PatEnsure">
+
+        </activity>
+        <activity android:name=".Personal.AboutUs">
+            
+        </activity>
+        <activity android:name=".Core.Message">
 
         </activity>
     </application>

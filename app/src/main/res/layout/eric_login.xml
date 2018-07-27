@@ -2,20 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="140dp"
+        android:textSize="30sp"
+        android:text="@string/app_name"
+        android:layout_marginStart="120dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="50dp"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginStart="50dp">
 
         <TextView
             android:id="@+id/login_tvUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             android:text="@string/tvUserName" />
 
         <EditText
@@ -23,19 +36,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:background="@null"
+            android:drawableBottom="@drawable/line"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:hint="@string/eTUserHint" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="64dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginStart="64dp">
 
         <TextView
             android:id="@+id/login_tvPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:text="@string/tvPassword" />
 
         <EditText
@@ -44,11 +64,16 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@null"
+            android:drawableBottom="@drawable/line"
             android:hint="@string/eTPassHint"
             android:layout_width="0dp" />
         <Button
             android:id="@+id/login_btGetVerCode"
             android:visibility="gone"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btGetVerCode"/>
@@ -65,14 +90,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
-            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
             android:text="@string/btLoad"/>
         <TextView
             android:id="@+id/login_tvLandWay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:onClick="messageClick"
             android:text="@string/messageLoad"/>
     </LinearLayout>

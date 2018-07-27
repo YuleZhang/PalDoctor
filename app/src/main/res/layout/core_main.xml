@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/mainbackground"
     tools:context=".Core.MainActivity">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -30,12 +31,15 @@
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:layout_height="match_parent" />
-            <ImageView
+            <ImageButton
+                android:id="@+id/main_Iamge_Setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/setting"
                 android:layout_marginLeft="80dp"
-                android:background="@drawable/setting" />
-            <ImageView
+                android:layout_marginStart="80dp" />
+            <ImageButton
+                android:id="@+id/main_Image_Mails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -50,51 +54,71 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
         <!--听诊-->
         <LinearLayout
             android:id="@+id/main_LinearListen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/khaki"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
             android:visibility="visible"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/main_tvPath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/main_tvPath"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="250dp"
+                android:layout_marginLeft="50dp">
+
                 <ImageButton
                     android:id="@+id/main_bTUpload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/upload"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="250dp"/>
+                    android:background="@drawable/upload" />
 
                 <ImageButton
                     android:id="@+id/main_bTDownload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="250dp"
                     android:layout_marginLeft="150dp"
                     android:background="@drawable/download" />
 
             </LinearLayout>
 
         </LinearLayout>
+        <!--部位-->
+        <LinearLayout
+            android:id="@+id/main_LinearLocate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/listenlocation"/>
+        </LinearLayout>
         <!--把脉-->
         <LinearLayout
             android:id="@+id/main_LinearPulse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text="@string/NoContent"/>
             <!--<TableLayout-->
                 <!--android:id="@+id/xueTangForm"-->
                 <!--android:layout_width="match_parent"-->
@@ -107,12 +131,15 @@
             android:id="@+id/main_LinearFootTte"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:visibility="gone">
 
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text="@string/NoContent"/>
         </LinearLayout>
         <!--个人界面-->
         <LinearLayout
@@ -122,131 +149,242 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/personbackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:onClick="toSelfInfo"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="30dp">
+
+                    <ImageButton
+                        android:id="@+id/main_image_portrait"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/headimage"/>
+                    <TextView
+                        android:id="@+id/main_tvUserMes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/main_image_portrait"
+                        android:scaleType="centerInside"
+                        android:text="@string/tvUserName"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="@dimen/margin_top"/>
+                    <TextView
+                        android:id="@+id/main_tvSelfInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/main_image_portrait"
+                        android:layout_marginTop="30dp"
+                        android:textSize="13sp"
+                        android:textColor="@color/white"
+                        android:text="@string/modifyInfo"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_toEndOf="@id/main_image_portrait" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/main_tvSelfInfo"
+                        android:background="@drawable/small_arrow"
+                        android:layout_marginTop="30dp"
+                        android:layout_toEndOf="@+id/main_tvSelfInfo" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <!--就诊记录-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_marginStart="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top"
+                android:onClick="MedRecordClick"
+                android:layout_marginLeft="@dimen/margin_left">
 
-                <ImageButton
-                    android:id="@+id/main_image_portrait"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:scaleType="centerInside"
-                    android:background="@drawable/headimage"/>
-                <TextView
-                    android:id="@+id/main_tvUserMes"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerInside"
-                    android:layout_marginLeft="30dp"
-                    android:text="@string/tvUserName"
+                    android:background="@drawable/medrecord"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/MedRecords"
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/arrow"
+                    android:layout_marginStart="@dimen/arrow_margin_Left"
+                    android:layout_marginLeft="@dimen/arrow_margin_Left" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/divider_padding"
+                android:layout_marginRight="@dimen/divider_padding"
+                android:layout_marginTop="@dimen/divider_height"
+                android:layout_height="@dimen/divider_thinline"
+                android:background="@color/gainsboro" />
+            <!--测量总汇-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="measureClick"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginStart="@dimen/margin_left">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/meatotalsink"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/tvMargin_left"
+                    android:layout_marginLeft="@dimen/tvMargin_left"
+                    android:text="@string/meaTotalSink"
                     android:textSize="20sp"/>
-
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:text="@string/uploadPortrait"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="1dp"
-                android:background="@color/orangered" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-                <!--就诊记录-->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@color/azure"
-                    android:onClick="MedRecordClick">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/MedRecords"
-                        android:textSize="20sp"/>
-                </LinearLayout>
-                <!--测量总汇-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/whitesmoke"
-                    android:onClick="measureClick"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/meaTotalSink"
-                        android:textSize="20sp"/>
-                </LinearLayout>
-                <!--身份验证-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/lightgoldenrodyellow"
-                    android:onClick="AuthenticationClick"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Authentication"
-                        android:textSize="20sp"/>
-                </LinearLayout>
-
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/arrow_margin_Left"
+                    android:layout_marginLeft="@dimen/arrow_margin_Left"
+                    android:background="@drawable/arrow"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_height="1dp"
-                android:background="@color/orangered" />
+                android:layout_marginLeft="@dimen/divider_padding"
+                android:layout_marginRight="@dimen/divider_padding"
+                android:layout_marginTop="@dimen/divider_height"
+                android:layout_height="@dimen/divider_thinline"
+                android:background="@color/gainsboro" />
+            <!--身份验证-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical">
-
+                android:onClick="AuthenticationClick"
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginStart="@dimen/margin_left"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/authentication"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="@dimen/tvMargin_left"
+                    android:layout_marginStart="@dimen/tvMargin_left"
+                    android:text="@string/Authentication"
+                    android:textSize="20sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/arrow"
+                    android:layout_marginStart="@dimen/arrow_margin_Left"
+                    android:layout_marginLeft="@dimen/arrow_margin_Left"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/divider_padding"
+                android:layout_marginRight="@dimen/divider_padding"
+                android:layout_marginTop="@dimen/divider_height"
+                android:layout_height="@dimen/divider_thinline"
+                android:background="@color/gainsboro" />
+            <!--帮助与反馈-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/margin_left">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/help"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tvMargin_left"
+                    android:layout_marginStart="@dimen/tvMargin_left"
                     android:text="@string/Help"
                     android:textSize="20sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/arrow"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginStart="160dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/divider_padding"
+                android:layout_marginRight="@dimen/divider_padding"
+                android:layout_marginTop="@dimen/divider_height"
+                android:layout_height="@dimen/divider_thinline"
+                android:background="@color/gainsboro" />
+            <!--关于我们-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="AboutUs"
+                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginStart="@dimen/margin_left"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/aboutus"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="@dimen/tvMargin_left"
                     android:text="@string/AboutUs"
                     android:textSize="20sp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/arrow_margin_Left"
+                    android:background="@drawable/arrow"
+                    android:layout_marginStart="@dimen/arrow_margin_Left" />
             </LinearLayout>
-        </LinearLayout>
-
+            </LinearLayout>
+        <ImageButton
+            android:id="@+id/main_bTSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/switchlisten" />
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="4dp"
+        android:background="@drawable/mainbottom"
         app:itemBackground="@null"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@drawable/bottom_navigation_selector"

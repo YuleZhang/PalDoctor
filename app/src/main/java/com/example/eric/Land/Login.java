@@ -81,6 +81,7 @@ public class Login extends Activity{
                         Toast.makeText(Login.this,"登陆成功",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         intent.putExtra("user",user);
+                        intent.putExtra("password",password);
                         intent.setClass(Login.this, MainActivity.class);
                         startActivity(intent);
                     }

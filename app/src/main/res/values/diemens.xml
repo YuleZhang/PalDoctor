@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="divider_padding">50dp</dimen>
+    <dimen name="divider_thinline">1dp</dimen>
+    <dimen name="divider_height">15dp</dimen>
+    <dimen name="high_divider_height">30dp</dimen>
+    <dimen name="margin_left">20dp</dimen>
+    <dimen name="margin_top">10dp</dimen>
+    <dimen name="arrow_margin_Left">180dp</dimen>
+    <dimen name="tvMargin_left">10dp</dimen>
+    <dimen name="portrait_left">220dp</dimen>
+    <dimen name="modifySecretLeft">10dp</dimen>
+</resources>

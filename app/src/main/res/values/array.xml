@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="SpiSex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="SpiRegion">
+        <item>北京</item>
+        <item>天津</item>
+        <item>上海</item>
+        <item>重庆</item>
+        <item>河北</item>
+        <item>山西</item>
+        <item>辽宁</item>
+        <item>河南</item>
+    </string-array>
+    <string-array name="SpiDocumentType">
+        <item>居民身份证</item>
+        <item>居民户口簿</item>
+        <item>临时身份证</item>
+    </string-array>
+</resources>

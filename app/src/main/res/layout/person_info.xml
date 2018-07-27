@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/person_imaBtm_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_gravity="center"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/modifyInfo"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/Portrait"/>
+
+        <ImageButton
+            android:id="@+id/person_portrait"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/headimage"
+            android:layout_marginStart="@dimen/portrait_left"
+            android:layout_marginLeft="@dimen/portrait_left"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke" />
+    <!--用户名-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/NickName"/>
+
+        <TextView
+            android:id="@+id/person_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:onClick="userModify"
+            android:textSize="20sp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginStart="200dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/divider_padding"
+        android:layout_marginStart="@dimen/divider_padding"
+        android:layout_marginRight="@dimen/divider_padding"
+        android:layout_marginEnd="@dimen/divider_padding"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/whitesmoke" />
+    <!--性别-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/sex"/>
+
+        <Spinner
+            android:id="@+id/person_SpiSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/portrait_left"
+            android:layout_marginStart="@dimen/portrait_left"
+            android:layout_gravity="center_vertical"
+            android:entries="@array/SpiSex">
+
+        </Spinner>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/divider_padding"
+        android:layout_marginStart="@dimen/divider_padding"
+        android:layout_marginRight="@dimen/divider_padding"
+        android:layout_marginEnd="@dimen/divider_padding"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/whitesmoke" />
+    <!--出生年月-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/dateOfBirth"/>
+
+        <TextView
+            android:id="@+id/person_Birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:onClick="birthDate"
+            android:layout_marginLeft="120dp"
+            android:layout_marginStart="120dp"
+            android:text="@string/dataExample"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/divider_padding"
+        android:layout_marginStart="@dimen/divider_padding"
+        android:layout_marginRight="@dimen/divider_padding"
+        android:layout_marginEnd="@dimen/divider_padding"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/whitesmoke" />
+    <!--出生地-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/locationOfBirth"/>
+
+        <Spinner
+            android:id="@+id/person_SpiRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="185dp"
+            android:layout_marginStart="185dp"
+            android:layout_gravity="center_vertical"
+            android:entries="@array/SpiRegion">
+        </Spinner>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/divider_padding"
+        android:layout_marginStart="@dimen/divider_padding"
+        android:layout_marginRight="@dimen/divider_padding"
+        android:layout_marginEnd="@dimen/divider_padding"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/whitesmoke" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/Height"/>
+        <TextView
+            android:id="@+id/person_Height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:onClick="MofdifyHeight"
+            android:layout_marginLeft="150dp"
+            android:layout_marginStart="150dp"
+            android:text="@string/HeightExample"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/divider_padding"
+        android:layout_marginStart="@dimen/divider_padding"
+        android:layout_marginRight="@dimen/divider_padding"
+        android:layout_marginEnd="@dimen/divider_padding"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/whitesmoke" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/Weight"/>
+        <TextView
+            android:id="@+id/person_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:onClick="MofdifyWeight"
+            android:layout_marginLeft="150dp"
+            android:layout_marginStart="150dp"
+            android:text="@string/WeightExample"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:background="@color/slategray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:onClick="MofdifySecret"
+            android:layout_gravity="center_vertical"
+            android:text="@string/ModifySecret"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:background="@color/powderblue">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:onClick="MofdifySave"
+            android:layout_gravity="center_vertical"
+            android:text="@string/Save"/>
+    </LinearLayout>
+</LinearLayout>

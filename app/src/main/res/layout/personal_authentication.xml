@@ -1,12 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:textSize="30sp"
-        android:text="@string/Authentication"/>
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/authen_imaBtm_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_gravity="center"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/Authentication"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/divider_height"
+        android:layout_height="@dimen/divider_thinline"
+        android:background="@color/gainsboro" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/authen_ImaDoctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/docpor" />
+
+        <Button
+            android:id="@+id/authon_BtnDoctor"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumturquoise"
+            android:layout_toRightOf="@+id/authen_ImaDoctor"
+            android:text="@string/IamDoctor"
+            android:layout_toEndOf="@+id/authen_ImaDoctor"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp" />
+        <ImageView
+            android:id="@+id/authon_ImaPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/patientpor"
+            android:layout_marginTop="105dp"/>
+        <Button
+            android:id="@+id/authon_BtnPatient"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/dodgerblue"
+            android:layout_toRightOf="@+id/authon_ImaPatient"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:text="@string/IamPatient"
+            android:layout_toEndOf="@+id/authon_ImaPatient"
+            android:layout_marginStart="20dp" />
+    </RelativeLayout>
 </LinearLayout>
