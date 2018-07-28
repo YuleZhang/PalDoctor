@@ -284,11 +284,21 @@ public class MainActivity extends AppCompatActivity{
                         @Override
                         public void run() {
 //                    Log.v(TAG, new LisDiagnosis().FileSend(fileName, path, "39.105.20.186", 9999)+"");
-                            new LisDiagnosis().FileSend(fileName, upLoadPath, "39.105.20.186", 9999);
-                            finalProgressDialog.dismiss();//进度完成时对话框消失
+                            int c = new LisDiagnosis().FileSend(fileName, upLoadPath, "39.105.20.186", 9999);
                             Looper.prepare();
-                            Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                            if(c == -1){
+                                Toast.makeText(getApplicationContext(),"上传失败，请打开服务器",Toast.LENGTH_SHORT).show();
+                                finalProgressDialog.dismiss();//进度完成时对话框消失
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "上传成功", Toast.LENGTH_SHORT).show();
+                                finalProgressDialog.dismiss();//进度完成时对话框消失
+                            }
                             Looper.loop();
+
+//                            Looper.prepare();
+//                            Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+//                            Looper.loop();
                         }
                     }).start();
                     super.onActivityResult(requestCode, resultCode, data);

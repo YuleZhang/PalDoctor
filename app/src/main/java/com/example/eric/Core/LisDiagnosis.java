@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -118,6 +119,7 @@ public class LisDiagnosis {
         try {
             Socket socket = new Socket(ipAddress, port);//设置socket，并进行连接connect
             int bufferSize = 8192;
+            int timeCounter = 0;
             byte[] buf = new byte[bufferSize];//数据存储
             // 选择进行传输的文件
             File file = new File(path);
@@ -131,7 +133,7 @@ public class LisDiagnosis {
             //将文件长度传输过去
             output.writeLong((long) file.length());
             output.flush();
-
+            Log.v(TAG,"begintimeCounter:"+timeCounter);
             int readSize = 0;
 
             while(true)
@@ -142,15 +144,16 @@ public class LisDiagnosis {
                 }
                 if(readSize == -1)
                     break;
-
                 output.write(buf, 0, readSize);
-
+                timeCounter++;
+                Log.v(TAG,"timeCounter:"+timeCounter);
                 if(!getAck.readUTF().equals("OK"))
                 {
                     Log.v(TAG,"服务器"+ ipAddress + ":" + port + "失去连接！");
                     break;
                 }
             }
+            Log.v(TAG,"FinaltimeCounter:"+timeCounter);
             output.flush();
             // 注意关闭socket链接哦，不然客户端会等待server的数据过来，
             // 直到socket超时，导致数据不完整。
