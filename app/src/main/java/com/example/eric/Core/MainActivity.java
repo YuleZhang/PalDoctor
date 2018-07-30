@@ -1,7 +1,6 @@
 package com.example.eric.Core;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -27,11 +23,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.eric.Land.Login;
 import com.example.eric.Personal.AboutUs;
 import com.example.eric.Personal.Authentication;
 import com.example.eric.Personal.MeasureRecord;
@@ -40,7 +34,6 @@ import com.example.eric.Personal.SelfInfo;
 import com.example.eric.R;
 import com.example.eric.View.BottomNavigationViewHelper;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity{
@@ -243,6 +236,13 @@ public class MainActivity extends AppCompatActivity{
                 startActivityForResult(intentSetting,6);
             }
         });
+        //蓝牙音频下载
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                new BlueToothTest().TestBT();
+            }
+        });
     }
     /*
     * 回调方法，文件上传
@@ -288,6 +288,10 @@ public class MainActivity extends AppCompatActivity{
                             Looper.prepare();
                             if(c == -1){
                                 Toast.makeText(getApplicationContext(),"上传失败，请打开服务器",Toast.LENGTH_SHORT).show();
+                                finalProgressDialog.dismiss();//进度完成时对话框消失
+                            }
+                            else if(c == 0){
+                                Toast.makeText(getApplicationContext(),"上传超时",Toast.LENGTH_SHORT).show();
                                 finalProgressDialog.dismiss();//进度完成时对话框消失
                             }
                             else {

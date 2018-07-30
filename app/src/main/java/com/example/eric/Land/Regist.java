@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.text.InputType;
@@ -44,6 +45,7 @@ public class Regist extends Activity {
     String phone;
     String content;//验证码
     String password;
+    public static final String TAG= "Regist";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +142,7 @@ public class Regist extends Activity {
         }
         content =vertiCode.toString();//短信内容
         SmsManager sm = SmsManager.getDefault();
+        Log.v(TAG,"sm:"+sm.toString()+"");
         sm.sendTextMessage(mobile,null,content,null,null);
         eTVerCode.setText(vertiCode.toString());
         startCountBack();//这里是用来进行请求参数的

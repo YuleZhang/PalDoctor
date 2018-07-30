@@ -19,7 +19,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketTimeoutException;
+import java.text.Format;
+import java.util.Date;
 
 /**
  * Created by Eric_ on 2018/7/24.
@@ -117,7 +122,11 @@ public class LisDiagnosis {
     }
     public int FileSend(String fileName, String path, String ipAddress, int port){
         try {
-            Socket socket = new Socket(ipAddress, port);//设置socket，并进行连接connect
+            Socket socket = new Socket();//设置socket，并进行连接connect
+            socket.connect(new InetSocketAddress(ipAddress, port),5000);
+            socket.setSoTimeout(2000);
+//            SocketAddress socAddress = new InetSocketAddress(ipAddress, port);
+//            socket.connect(socAddress, 5000);
             int bufferSize = 8192;
             int timeCounter = 0;
             byte[] buf = new byte[bufferSize];//数据存储
@@ -147,7 +156,14 @@ public class LisDiagnosis {
                 output.write(buf, 0, readSize);
                 timeCounter++;
                 Log.v(TAG,"timeCounter:"+timeCounter);
-                if(!getAck.readUTF().equals("OK"))
+                Log.v(TAG,socket.isBound()+""); // 是否绑定
+                Log.v(TAG,socket.isClosed()+""); // 是否关闭
+                Log.v(TAG,socket.isConnected()+""); // 是否连接
+                Log.v(TAG,socket.isInputShutdown()+""); // 是否关闭输入流
+                Log.v(TAG,socket.isOutputShutdown()+""); // 是否关闭输出流
+                Log.v(TAG,"结束：");
+                Log.v(TAG,"getAck.readUTF():"+ getAck.readUTF());
+            if(!getAck.readUTF().equals("OK"))
                 {
                     Log.v(TAG,"服务器"+ ipAddress + ":" + port + "失去连接！");
                     break;
@@ -163,6 +179,8 @@ public class LisDiagnosis {
             getAck.close();
             Log.v(TAG,"文件传输完成");
             return 1;
+        } catch (SocketTimeoutException se){
+            return 0;//超时
         } catch (Exception e) {
             Log.v(TAG,e.getMessage());
             return -1;
