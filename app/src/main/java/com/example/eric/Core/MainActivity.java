@@ -168,10 +168,6 @@ public class MainActivity extends AppCompatActivity{
             if (file.exists()) {
                 try {
                     ReadBmpFromSd();
-//                    bitmap= BitmapFactory.decodeFile(path);
-//                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 70, out);
-//                    btnPortrait.setImageBitmap(bitmap);
                 }
                 catch (Exception ex){
                     Toast.makeText(this,"错误："+ex,Toast.LENGTH_SHORT);
@@ -197,10 +193,10 @@ public class MainActivity extends AppCompatActivity{
 //                sendMsg();
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 //intent.setType(“image/*”);//选择图片
-                //intent.setType(“audio/*”); //选择音频
+                intent.setType("audio/*"); //选择音频
                 //intent.setType(“video/*”); //选择视频 （mp4 3gp 是android支持的视频格式）
                 //intent.setType(“video/*;image/*”);//同时选择视频和图片
-                intent.setType("*/*");//无类型限制
+//                intent.setType("*/*");//无类型限制
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(intent, 1);
             }
@@ -241,6 +237,44 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 //                new BlueToothTest().TestBT();
+                if (!noteIntentConnect(mConetxt)){
+                    return;//检测联网信息
+                }
+                ProgressDialog progressDialog = null;
+                progressDialog = ProgressDialog.show(mConetxt, "请稍等...", "正在玩命下载中......", true);
+                //设置对话进度条样式为水平
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                //设置对话进度条显示在屏幕中央（方便截图）
+                progressDialog.getWindow().setGravity(Gravity.CENTER);
+                //使用匿名内部类实现线程并启动
+                final ProgressDialog finalProgressDialog = progressDialog;
+                new Thread(new Runnable() {
+                    int initial = 0;//初始下载进度
+                    @Override
+                    public void run() {
+//                    Log.v(TAG, new LisDiagnosis().FileSend(fileName, path, "39.105.20.186", 9999)+"");
+//                            int c = new LisDiagnosis().FileSend(user, upLoadPath, "39.105.20.186", 9999);
+                        int c = new LisDiagnosis().FileSend("DownLoad",user, upLoadPath, "39.105.20.186", 9999);
+                        Looper.prepare();
+                        if(c == -1){
+                            Toast.makeText(getApplicationContext(),"下载失败，请打开服务器",Toast.LENGTH_SHORT).show();
+                            finalProgressDialog.dismiss();//进度完成时对话框消失
+                        }
+                        else if(c == 0){
+                            Toast.makeText(getApplicationContext(),"下载超时",Toast.LENGTH_SHORT).show();
+                            finalProgressDialog.dismiss();//进度完成时对话框消失
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "下载成功", Toast.LENGTH_SHORT).show();
+                            finalProgressDialog.dismiss();//进度完成时对话框消失
+                        }
+                        Looper.loop();
+
+//                            Looper.prepare();
+//                            Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+//                            Looper.loop();
+                    }
+                }).start();
             }
         });
     }
@@ -284,7 +318,8 @@ public class MainActivity extends AppCompatActivity{
                         @Override
                         public void run() {
 //                    Log.v(TAG, new LisDiagnosis().FileSend(fileName, path, "39.105.20.186", 9999)+"");
-                            int c = new LisDiagnosis().FileSend(fileName, upLoadPath, "39.105.20.186", 9999);
+//                            int c = new LisDiagnosis().FileSend(user, upLoadPath, "39.105.20.186", 9999);
+                            int c = new LisDiagnosis().FileSend("UpLoad",user, upLoadPath, "39.105.20.186", 9999);
                             Looper.prepare();
                             if(c == -1){
                                 Toast.makeText(getApplicationContext(),"上传失败，请打开服务器",Toast.LENGTH_SHORT).show();

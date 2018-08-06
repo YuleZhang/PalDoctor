@@ -1,5 +1,6 @@
 package com.example.eric.Core;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,11 +13,14 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
@@ -120,69 +124,79 @@ public class LisDiagnosis {
         }
         return null;
     }
-    public int FileSend(String fileName, String path, String ipAddress, int port){
+    @SuppressLint("SdCardPath")
+    public int FileSend(String oper, String user, String path, String ipAddress, int port){
         try {
-            Socket socket = new Socket();//设置socket，并进行连接connect
+            Socket socket = new Socket();
             socket.connect(new InetSocketAddress(ipAddress, port),5000);
-            socket.setSoTimeout(2000);
-//            SocketAddress socAddress = new InetSocketAddress(ipAddress, port);
-//            socket.connect(socAddress, 5000);
-            int bufferSize = 8192;
-            int timeCounter = 0;
-            byte[] buf = new byte[bufferSize];//数据存储
-            // 选择进行传输的文件
-            File file = new File(path);
-            Log.v(TAG,"文件长度:" + (int) file.length());
-            DataInputStream input = new DataInputStream(new FileInputStream(path));
-            DataOutputStream output = new DataOutputStream(socket.getOutputStream());//将socket设置为数据的传输出口
-            DataInputStream getAck = new DataInputStream(socket.getInputStream());//设置socket数据的来源
-            //将文件名传输过去
-            output.writeUTF(file.getName());
+            socket.setSoTimeout(30000);
+            long filelen = 0;
+            int buffersize = 8192;
+            byte[] buf = new byte[buffersize];
+            DataInputStream input;
+            DataOutputStream output=  new DataOutputStream(socket.getOutputStream());
+            DataInputStream getAck = new DataInputStream(socket.getInputStream());
+            output.writeUTF(user);
             output.flush();
-            //将文件长度传输过去
-            output.writeLong((long) file.length());
+            //将要执行的操作+文件名传过去传过去
+            output.writeUTF(oper);
+            System.out.println("The operation is: "+oper);
             output.flush();
-            Log.v(TAG,"begintimeCounter:"+timeCounter);
-            int readSize = 0;
-
-            while(true)
-            {
-                if(input != null)
-                {
-                    readSize = input.read(buf);
+            if(oper.equals("UpLoad")) {
+                File file = new File(path);
+                System.out.println(path);
+                if(!file.exists()){
+                    return -1;
                 }
-                if(readSize == -1)
-                    break;
-                output.write(buf, 0, readSize);
-                timeCounter++;
-                Log.v(TAG,"timeCounter:"+timeCounter);
-                Log.v(TAG,socket.isBound()+""); // 是否绑定
-                Log.v(TAG,socket.isClosed()+""); // 是否关闭
-                Log.v(TAG,socket.isConnected()+""); // 是否连接
-                Log.v(TAG,socket.isInputShutdown()+""); // 是否关闭输入流
-                Log.v(TAG,socket.isOutputShutdown()+""); // 是否关闭输出流
-                Log.v(TAG,"结束：");
-                Log.v(TAG,"getAck.readUTF():"+ getAck.readUTF());
-            if(!getAck.readUTF().equals("OK"))
-                {
-                    Log.v(TAG,"服务器"+ ipAddress + ":" + port + "失去连接！");
-                    break;
+                input = new DataInputStream(new FileInputStream(path));
+                output.writeUTF(path);
+                output.flush();
+                //将文件长度传过去
+                output.writeLong((long) file.length());
+                output.flush();
+                int readSize = 0;
+                while ((readSize = input.read(buf))!=-1){
+                    output.write(buf,0,readSize);
                 }
+                output.flush();
+                input.close();
+                output.close();
+                socket.close();
+                getAck.close();
+                return 1;
             }
-            Log.v(TAG,"FinaltimeCounter:"+timeCounter);
-            output.flush();
-            // 注意关闭socket链接哦，不然客户端会等待server的数据过来，
-            // 直到socket超时，导致数据不完整。
-            input.close();
-            output.close();
-            socket.close();
-            getAck.close();
-            Log.v(TAG,"文件传输完成");
-            return 1;
-        } catch (SocketTimeoutException se){
+            else {
+                path = File.separator+ "sdcard"+File.separator;
+//                String sdStatus = Environment.getExternalStorageState();
+//                if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+//                    return 0;
+//                }
+                input = new DataInputStream(socket.getInputStream());
+                String downFileName = input.readUTF();
+                System.out.println("文件名称为: "+downFileName);
+                File file = new File(path+downFileName);
+                if(!file.exists()){
+                    file.createNewFile();
+                }
+                filelen = input.readLong();//读取文件长度
+                System.out.println("文件长度为: "+filelen);
+                output = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+                int readSize = 0;
+                while ((readSize = getAck.read(buf))!=-1){
+                    output.write(buf,0,readSize);
+                }
+                output.flush();
+                input.close();
+                output.close();
+                socket.close();
+                getAck.close();
+                return 1;
+            }
+        }
+        catch (SocketTimeoutException se){
             return 0;//超时
-        } catch (Exception e) {
-            Log.v(TAG,e.getMessage());
+        }catch (IOException e) {
+            e.printStackTrace();
             return -1;
         }
     }
